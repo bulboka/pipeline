@@ -11,7 +11,7 @@ Menu.prototype = {
     this.sprite = this.game.add.sprite(this.game.world.centerX, 138, 'yeoman');
     this.sprite.anchor.setTo(0.5, 0.5);
 
-    this.titleText = this.game.add.text(this.game.world.centerX, 300, '\'Говно!!, \'Алё!', style);
+    this.titleText = this.game.add.text(this.game.world.centerX, 300, '\'Ale!!, \'Ale!', style);
     this.titleText.anchor.setTo(0.5, 0.5);
 
     this.instructionsText = this.game.add.text(this.game.world.centerX, 400, 'Click anywhere to play "Click The Yeoman Logo"', { font: '16px Arial', fill: '#ffffff', align: 'center'});

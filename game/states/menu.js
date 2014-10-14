@@ -1,30 +1,37 @@
-
 'use strict';
-function Menu() {}
+function Menu() {
+}
 
 Menu.prototype = {
-  preload: function() {
+	preload: function () {
 
-  },
-  create: function() {
-    var style = { font: '65px Arial', fill: '#ffffff', align: 'center'};
-    this.sprite = this.game.add.sprite(this.game.world.centerX, 138, 'yeoman');
-    this.sprite.anchor.setTo(0.5, 0.5);
+	},
+	create: function () {
+		this.background = this.game.add.sprite(0, 0, "background");
+		this.ground = this.game.add.tileSprite(0, 400, 335, 112, "ground");
+		this.ground.autoScroll(-200, 0);
 
-    this.titleText = this.game.add.text(this.game.world.centerX, 300, '\'Ale!!, \'Ale!', style);
-    this.titleText.anchor.setTo(0.5, 0.5);
+		this.titleGroup = this.game.add.group();
+		this.title = this.game.add.sprite(0, 0, "title");
+		this.titleGroup.add(this.title);
+		this.bird = this.game.add.sprite(200, 5, "bird");
+		this.titleGroup.add(this.bird);
+		this.bird.animations.add("flap");
+		this.bird.animations.play("flap", 12, true);
+		//this.titleGroup.anchor.setTo(0.5, 0.5);
+		this.titleGroup.x = 30;
+		this.titleGroup.y = 100;
+		this.game.add.tween(this.titleGroup).to({y:this.titleGroup.y + 25}, 950, Phaser.Easing.Sinusoidal.InOut, true, 0, 1000, true);
 
-    this.instructionsText = this.game.add.text(this.game.world.centerX, 400, 'Click anywhere to play "Click The Yeoman Logo"', { font: '16px Arial', fill: '#ffffff', align: 'center'});
-    this.instructionsText.anchor.setTo(0.5, 0.5);
+		this.startButton = this.game.add.button(this.game.width / 2, 300, "startButton", this.startClick, this);
+		this.startButton.anchor.setTo(0.5, 0.5);
+	},
+	startClick: function() {
+		this.game.state.start("play");
+	},
+	update: function () {
 
-    this.sprite.angle = -20;
-    this.game.add.tween(this.sprite).to({angle: 20}, 1000, Phaser.Easing.Linear.NONE, true, 0, 1000, true);
-  },
-  update: function() {
-    if(this.game.input.activePointer.justPressed()) {
-      this.game.state.start('play');
-    }
-  }
+	}
 };
 
 module.exports = Menu;
